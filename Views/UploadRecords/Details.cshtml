@@ -1,0 +1,23 @@
+﻿@model Nature_Gallery_Final_Project.Models.UploadRecord
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>UploadRecord</h4>
+    <hr />
+
+    <h4>@Html.DisplayFor(model => model.Image.Heading)</h4>
+
+
+    <img class="img-thumbnail" src="/pics/@Html.DisplayFor(model => model.Image.ImageUrl)" />
+
+    <h5>Uploaded By   @Html.DisplayFor(model => model.Publisher.PublisherName)  Email: @Html.DisplayFor(model => model.Publisher.EmailAddresss) </h5>
+    <h6> Published Date : @Html.DisplayFor(model => model.UploadTime) </h6>
+</div>
+<div>
+   
+</div>

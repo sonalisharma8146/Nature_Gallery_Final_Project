@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Nature_Gallery_Final_Project.Models.UploadRecord>
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Nature Photo Gallery</h1>
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("publisher_user"))
+{
+<p>
+    <a class="btn btn-primary btn-xl" href="/Images/Create">Upload New Image</a>
+</p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image.Heading)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UploadTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    <img class="img-thumbnail"style="width:100%; height:40vh" src="/pics/@Html.DisplayFor(model => item.Image.ImageUrl)" />
+                </td>
+                <th>
+                    @Html.DisplayFor(model => item.Image.Heading)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher.EmailAddresss)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UploadTime)
+                </td>
+                @if (SignInManager.IsSignedIn(User) && (User.IsInRole("admin_user") || User.IsInRole("publisher_user"))) {
+                <td>
+                    <a class="btn btn-primary btn-xl" href="/Images/Edit/@item.ImageId">Edit</a> |
+                    <a class="btn btn-primary btn-xl" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-primary btn-xl" href="/Images/Delete/@item.ImageId" >Delete</a>
+                </td>
+                } else { 
+                  <td>
+               
+                <a class="btn btn-primary btn-xl" asp-action="Details" asp-route-id="@item.Id">View</a> |
+                
+                 </td>
+                
+                }
+            </tr>
+        }
+    </tbody>
+</table>

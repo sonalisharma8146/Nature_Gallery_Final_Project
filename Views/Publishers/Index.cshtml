@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Nature_Gallery_Final_Project.Models.Publisher>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Publishers</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddresss)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddresss)
+            </td>
+            <td>
+                <a class="btn btn-primary btn-xl" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-primary btn-xl" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-primary btn-xl" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
